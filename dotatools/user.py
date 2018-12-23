@@ -35,3 +35,19 @@ class User(object):
             return (j[0]["match_id"])
         except IndexError:
             return None
+
+	def wlpatch(cls, patch):
+		#Fetch winrate per patch
+
+		r = requests.get("https://api.opendota.com/api/players/{}/wl?patch={}".format(cls.steamID, patch))
+		j = json.loads(r.text)
+
+		return (j)
+
+	def wldays(cls, days):
+		#Fetch winrate per last "x" days
+
+		r = requests.get("https://api.opendota.com/api/players/{}/wl?date={}".format(cls.steamID, days))
+		j = json.loads(r.text)
+
+		return (j)
